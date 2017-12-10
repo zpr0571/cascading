@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+.blue {background-color: #ccccff;}			
+th {
+    background-color: #ddd;
+    font-weight: bold;
+    height: 35px;
+     border: 1px solid gray;
+    height: 30px;
+    text-align: center;
+    width: 150px;
+}
+tbody td{ border: 1px solid gray;  height: 30px;
+    text-align: center;
+    width: 150px;}
+   
+		</style>
+	</head>
+	<body>
+	
+		<table border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>选择</th>
+					<th>产品 ID</th>
+					<th>产品名称</th>
+					<th>产品价格</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			
+			<tbody id="tbody_cl">
+				
+				
+			</tbody>
+		</table>
+		<button onclick="add()">添加</button>
+		<button onclick="del()">多项删除</button>
+	</body>
+</html>
+<script type="text/javascript">
+	var count=1;
+	function add () {
+		var tbody=document.querySelector('tbody')
+		
+		var tr=document.createElement('tr')
+		
+		//第一个TD  
+		var td=document.createElement('td')
+		var input2=document.createElement('input')
+		//设置input 为checkbox
+		input2.type='checkbox'
+		input2.className='check'
+		td.appendChild(input2)
+		tr.appendChild(td)
+		//第二个TD  
+		var td=document.createElement('td')
+		var input2=document.createElement('input')
+		input2.value=count;
+		count++;
+		td.appendChild(input2)
+		tr.appendChild(td)
+		
+		var td=document.createElement('td')
+		var input2=document.createElement('input')
+		td.appendChild(input2)
+		tr.appendChild(td)
+		
+		var td=document.createElement('td')
+		var input2=document.createElement('input')
+		td.appendChild(input2)
+		tr.appendChild(td)
+		
+		//最后一个td
+		var td=document.createElement('td')
+		var input2=document.createElement('input')
+		//设置类型为button		
+		input2.type='button';
+		input2.value='删除'
+		
+		input2.setAttribute('onclick','del_one(this)')
+		
+		td.appendChild(input2)
+		tr.appendChild(td)
+
+		tbody.appendChild(tr)
+		color ()
+	}
+	
+	
+	function del () {//
+		var check=document.querySelectorAll('.check')//静态集合   4		
+		//var check=document.getElementsByClassName('check')//动态集合  4
+		 	 
+		var fa=document.getElementById('tbody_cl')
+		
+		for (var i = 0; i <check.length; i++) {
+			if(check[i].checked==true){
+				console.log(check.length+'-----------------')
+				var d=check[i].parentNode.parentNode;
+				fa.removeChild(d)
+			}
+		}
+		color ()
+		
+	}
+	
+	function del_one(obj){
+		var fa=document.getElementById('tbody_cl')
+		var d=obj.parentNode.parentNode;
+		fa.removeChild(d)
+		color ()
+	}
+	
+	function color () {
+			var a=document.querySelectorAll('#tbody_cl>tr')
+			
+			for (var i = 0; i < a.length; i++) {
+				a[i].className='';
+				if(i%2==0){
+					a[i].className='blue'
+				}
+			}
+	}
+	
+	
+</script>
